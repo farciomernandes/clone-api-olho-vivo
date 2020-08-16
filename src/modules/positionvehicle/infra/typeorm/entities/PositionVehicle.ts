@@ -4,7 +4,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryColumn,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
+
+import Vehicle from '../../../../vehicles/infra/typeorm/entities/Vehicle';
 
 
 @Entity('vehiclePosition')
@@ -17,6 +21,13 @@ class PositionVehicle {
 
   @Column()
   longitude: number;
+
+  @ManyToOne(() => Vehicle)
+  @JoinColumn({name: 'vehicle_id'})
+  vehicle: string;
+
+  @Column()
+  vehicle_id: string;
 
   @CreateDateColumn()
   created_at: Date;

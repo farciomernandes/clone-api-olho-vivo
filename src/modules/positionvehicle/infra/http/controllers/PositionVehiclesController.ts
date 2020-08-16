@@ -60,7 +60,8 @@ export default class PositionVehiclesController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { id } = request.body;
+    console.log('ALOU')
+    const { id } = request.params;
 
     const findByPositionVehicle = container.resolve(
       FindByIdPositionVehicleService,

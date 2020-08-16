@@ -5,6 +5,7 @@ import PositionVehicle from '../entities/PositionVehicle';
 import ICreatePositionVehicle from '../../../dtos/ICreatePositionVehicle';
 import IPositionVehicleRepository from '../../../repositories/IPositionVehicleRepository';
 import Vehicle from '../../../../vehicles/infra/typeorm/entities/Vehicle';
+import { uuid } from 'uuidv4';
 
 class PositionVehicleRepository implements IPositionVehicleRepository {
   private ormRepository: Repository<PositionVehicle>;
@@ -22,7 +23,6 @@ class PositionVehicleRepository implements IPositionVehicleRepository {
     longitude,
     id,
   }: ICreatePositionVehicle): Promise<PositionVehicle> {
-    console.log('REPOSITORIOS');
     const checkExist = await this.vehicleRepository.findOne(id);
 
     if(!checkExist){
@@ -33,11 +33,13 @@ class PositionVehicleRepository implements IPositionVehicleRepository {
       latitude,
       longitude,
       vehicle_id: id,
+      id: uuid(),
     });
 
-    const positionVehicleCreated = await this.ormRepository.save(
-      newPositionVehicle,
-    );
+      const positionVehicleCreated = await this.ormRepository.save(
+        newPositionVehicle,
+      );
+
     return positionVehicleCreated;
   }
 
@@ -53,22 +55,19 @@ class PositionVehicleRepository implements IPositionVehicleRepository {
     await this.ormRepository.remove(checkExist);
   }
 
-  public async findById(id: string): Promise<PositionVehicle | undefined> {
-    const searchpositionVehicle = await this.ormRepository.findOne({
-      where: {vehicle_id: id}
-    });
+  public async findById(id: string): Promise<PositionVehicle> {
+    const searchpositionVehicle = await this.ormRepository.findOne(id);
 
-    return searchpositionVehicle || undefined;
+
+    if(!searchpositionVehicle){
+    throw new AppError('Id not found!')
+  }
+    return searchpositionVehicle;
   }
 
   public async getAll(): Promise<PositionVehicle[]> {
 
-    let lines;
-    try{
-      lines  = await this.ormRepository.find();
-    }catch(err){
-      console.log(err)
-    }
+      const lines  = await this.ormRepository.find();
 
     return lines;
   }

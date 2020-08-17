@@ -8,7 +8,11 @@ const linesController = new LinesController();
 linesRouter.post('/create', linesController.create);
 linesRouter.put('/update/:id', linesController.update);
 linesRouter.delete('/delete', linesController.delete);
+
 linesRouter.get('/', linesController.getAll);
 linesRouter.get('/search/:id', linesController.findById);
+linesRouter.get('/search', linesController.lineByStop);
+
+
 
 export default linesRouter;

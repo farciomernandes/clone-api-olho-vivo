@@ -12,6 +12,8 @@ class LineRepository implements ILineRepository {
   private ormRepository: Repository<Line>;
   private lineStopRepository: Repository<LineStopRelation>;
   private stopRepository: Repository<Stop>;
+  private lineRepository: Repository<Line>;
+
 
 
 
@@ -20,6 +22,8 @@ class LineRepository implements ILineRepository {
     this.ormRepository = getRepository(Line);
     this.stopRepository = getRepository(Stop);
     this.lineStopRepository = getRepository(LineStopRelation);
+    this.lineRepository = getRepository(Line);
+
   }
 
   public async create({ name, stop_name }: ICreateLineDTO): Promise<Line> {
@@ -90,6 +94,18 @@ class LineRepository implements ILineRepository {
     const createdLine = await this.ormRepository.save(newLine);
 
     return createdLine;
+  }
+  public async lineByStop(stop_id: string): Promise<Stop[]>{
+    const searchLines = await this.lineStopRepository.find({
+      where: {stop_id: stop_id}
+    })
+
+
+    if(searchLines.length == 0){
+      throw new AppError('This stop do not have lines.')
+    }
+
+    return searchLines;
   }
 }
 

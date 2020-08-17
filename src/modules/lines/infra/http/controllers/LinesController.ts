@@ -7,6 +7,7 @@ import UpdatedLineService from '../../../services/UpdatedLineService';
 
 import GetAllLineService from '../../../services/GetAllLineService';
 import FindByIdLineService from '../../../services/FindByIdLineService';
+import LineByStop from '../../../services/LineByStop';
 
 export default class LinesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -64,5 +65,17 @@ export default class LinesController {
     const vehicles = await getStops.execute();
 
     return response.json(vehicles);
+  }
+
+  public async lineByStop(request: Request, response: Response): Promise<Response> {
+    const { stop_id } = request.body;
+
+    const getLines = container.resolve(LineByStop);
+
+    const lines = await getLines.execute(stop_id);
+
+    console.log(lines);
+
+    return response.json(lines);
   }
 }

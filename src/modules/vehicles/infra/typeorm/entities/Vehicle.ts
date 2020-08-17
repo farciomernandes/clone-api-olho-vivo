@@ -3,12 +3,12 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
-// import Line from '@modules/lines/infra/typeorm/entities/Line';
+import Line from '../../../../lines/infra/typeorm/entities/Line';
 
 @Entity('vehicles')
 class Vehicle {
@@ -21,12 +21,15 @@ class Vehicle {
   @Column()
   model: string;
 
+  @ManyToOne(() => Line)
+  @JoinColumn({name: 'line_id'})
+  line: string;
+
   @Column()
   line_id: string;
 
-  // @ManyToOne(() => Line)
-  // @JoinColumn({ name: 'lineId' })
-  // lineId: Line;
+  @Column()
+  line_name: string;
 
   @CreateDateColumn()
   created_at: Date;

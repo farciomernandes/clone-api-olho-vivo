@@ -24,8 +24,8 @@ class UpdatedLineService {
     }
 
     const vehicle = {
-      ...data,
       ...checkExist,
+      ...data,
     };
 
     return vehicle;

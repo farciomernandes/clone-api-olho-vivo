@@ -24,6 +24,11 @@ export default class CreateVehicle1597108201176 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'line_name',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

@@ -3,9 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToOne,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
 
 
@@ -16,6 +14,7 @@ class Line {
 
   @Column()
   name: string;
+
 
   @CreateDateColumn()
   created_at: Date;

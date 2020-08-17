@@ -4,7 +4,6 @@ import { injectable, inject } from 'tsyringe';
 import ILineRepository from '../repositories/ILineRepository';
 import AppError from '../../../shared/errors/AppError';
 import Line from '../infra/typeorm/entities/Line';
-import ICreateLineDTO from '../dtos/ICreateLineDTO';
 
 @injectable()
 class UpdatedLineService {
@@ -13,7 +12,7 @@ class UpdatedLineService {
     private vehiclesRepository: ILineRepository,
   ) {}
 
-  public async execute(id: string, data: ICreateLineDTO): Promise<Line | void> {
+  public async execute(id: string, name: string): Promise<Line | void> {
     const checkExist = await this.vehiclesRepository.findById(id);
 
     if (!checkExist) {
@@ -22,10 +21,10 @@ class UpdatedLineService {
 
     const line = {
       ...checkExist,
-      ...data,
+      name,
     };
 
-    const updatedLine = await this.vehiclesRepository.update(id, line)
+    const updatedLine = await this.vehiclesRepository.update(id, line);
 
     return updatedLine;
   }

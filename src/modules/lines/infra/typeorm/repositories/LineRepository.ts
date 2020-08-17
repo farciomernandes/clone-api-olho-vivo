@@ -40,6 +40,7 @@ class LineRepository implements ILineRepository {
 
 
      const lineCreated = await this.ormRepository.save(newLine);
+     console.log('BUG')
 
     const createRelation = await this.lineStopRepository.create({
       id: uuid(),

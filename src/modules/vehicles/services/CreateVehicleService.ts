@@ -13,13 +13,13 @@ class CreateVehicleService {
   ) {}
 
   public async execute({ line_id, name, model }: IVehicles): Promise<Vehicle> {
-    console.log('CHEGOU EM SERVICES');
 
     const vehicle = await this.vehiclesRepository.create({
       line_id,
       model,
       name,
     });
+
 
     return vehicle;
   }

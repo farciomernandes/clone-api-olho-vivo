@@ -45,7 +45,7 @@ class PositionVehicleRepository implements IPositionVehicleRepository {
 
   public async delete(id: string): Promise<void> {
     const checkExist = await this.ormRepository.findOne({
-      where: {vehicle_id: id}
+      where: {id: id}
     });
 
     if (!checkExist) {

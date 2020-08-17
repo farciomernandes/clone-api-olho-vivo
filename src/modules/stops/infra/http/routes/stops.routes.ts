@@ -9,6 +9,6 @@ stopsRouter.post('/create', stopsController.create);
 stopsRouter.put('/update/:id', stopsController.update);
 stopsRouter.delete('/delete', stopsController.delete);
 stopsRouter.get('/', stopsController.getAll);
-stopsRouter.get('/search', stopsController.findById);
+stopsRouter.get('/search/:id', stopsController.findById);
 
 export default stopsRouter;

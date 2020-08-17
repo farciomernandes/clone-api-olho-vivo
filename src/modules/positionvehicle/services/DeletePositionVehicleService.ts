@@ -14,7 +14,6 @@ class DeletePositionVehicleService {
 
   public async execute(id: string): Promise<PositionVehicle | void> {
     const checkExist = await this.positionVehicleRepository.findById(id);
-
     if (!checkExist) {
       throw new AppError('Id not found!');
     }

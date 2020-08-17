@@ -33,16 +33,14 @@ export default class LinesController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, stop_name, id } = request.body;
+    const { name } = request.body;
+    const { id } = request.params;
 
     const uptdadeVehicle = container.resolve(UpdatedLineService);
 
-    const data = {
-      name,
-      stop_name,
-    };
 
-    const updatedStop = await uptdadeVehicle.execute(id, data);
+
+    const updatedStop = await uptdadeVehicle.execute(id, name);
 
     return response.json(updatedStop);
   }
@@ -51,7 +49,7 @@ export default class LinesController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const { id } = request.body;
+    const { id } = request.params;
 
     const findByStop = container.resolve(FindByIdLineService);
 

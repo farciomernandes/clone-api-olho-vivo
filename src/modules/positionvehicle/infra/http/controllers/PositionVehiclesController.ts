@@ -10,7 +10,6 @@ import FindByIdPositionVehicleService from '../../../services/FindByIdPositionVe
 
 export default class PositionVehiclesController {
   public async create(request: Request, response: Response): Promise<Response> {
-    console.log('controller');
 
     const { latitude, longitude, id } = request.body;
 
@@ -60,7 +59,6 @@ export default class PositionVehiclesController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    console.log('ALOU')
     const { id } = request.params;
 
     const findByPositionVehicle = container.resolve(

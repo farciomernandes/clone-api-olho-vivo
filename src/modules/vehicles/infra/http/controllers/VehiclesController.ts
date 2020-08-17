@@ -8,17 +8,18 @@ import UpdatedVehicleService from '../../../services/UpdatedVehicleService';
 import GetAllVehicleService from '../../../services/GetAllVehicleService';
 import FindByIdVehicleService from '../../../services/FindByIdVehicleService';
 
+
+
 export default class VehiclesController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { model, name } = request.body;
-    console.log('CHEGOU EM ROTAS');
+    const { model, name, line_id } = request.body;
 
     const createVehicle = container.resolve(CreateVehicleService);
-    console.log('PASSOU DO CONTAINER');
 
     const vehicle = await createVehicle.execute({
       model,
       name,
+      line_id,
     });
 
     return response.json(vehicle);
@@ -35,15 +36,13 @@ export default class VehiclesController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { line_id, name, model } = request.body;
+    const { name, model } = request.body;
     const { id } = request.params;
 
-    console.log("ENTROU AQUI NO CONTROOLLER")
 
     const uptdadeVehicle = container.resolve(UpdatedVehicleService);
 
     const data = {
-      line_id,
       name,
       model,
     };

@@ -3,7 +3,7 @@ import ICreateLineDTO from '../dtos/ICreateLineDTO';
 
 export default interface ILineRepositoy {
   create(data: ICreateLineDTO): Promise<Line>;
-  findById(id: string): Promise<Line>;
+  findById(id: string): Promise<Line[]>;
   getAll(): Promise<Line[]>;
   update(id: string, data: Line): Promise<Line | void>;
   delete(id: string): Promise<Line | void>;

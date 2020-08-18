@@ -65,14 +65,18 @@ class LineRepository implements ILineRepository {
     await this.ormRepository.remove(checkExist);
   }
 
-  public async findById(id: string): Promise<Line> {
+  public async findById(id: string): Promise<Line[]> {
     const searchLine = await this.ormRepository.findOne(id);
 
     if (!searchLine) {
       throw new AppError('id not found.');
     }
 
-    return searchLine;
+    const lines = await this.ormRepository.find({
+      where: { name: searchLine.name },
+    });
+
+    return lines;
   }
 
   public async getAll(): Promise<Line[]> {

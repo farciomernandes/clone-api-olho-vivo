@@ -9,6 +9,7 @@ import GetAllLineService from '../../../services/LineServices/GetAllLineService'
 import FindByIdLineService from '../../../services/LineServices/FindByIdLineService';
 import LineByStop from '../../../services/LineStopRelationServices/LineByStop';
 import VehiclesForLineService from '../../../services/LineStopRelationServices/VehiclesForLineService';
+import GetAllRelationsService from '../../../services/LineStopRelationServices/GetAllRelationsService';
 
 export default class LinesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -90,5 +91,16 @@ export default class LinesController {
     const vehicles = await getVehicles.execute(id);
 
     return response.json(vehicles);
+  }
+
+  public async getAllRelations(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const getRelations = container.resolve(GetAllLineService);
+
+    const relations = await getRelations.execute();
+
+    return response.json(relations);
   }
 }

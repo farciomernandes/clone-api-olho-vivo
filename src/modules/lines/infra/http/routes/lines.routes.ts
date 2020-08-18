@@ -13,5 +13,6 @@ linesRouter.get('/', linesController.getAll);
 linesRouter.get('/search/:id', linesController.findById);
 linesRouter.get('/search', linesController.lineByStop);
 linesRouter.get('/vehicles', linesController.vehiclesForLine);
+linesRouter.get('/relations', linesController.getAllRelations);
 
 export default linesRouter;

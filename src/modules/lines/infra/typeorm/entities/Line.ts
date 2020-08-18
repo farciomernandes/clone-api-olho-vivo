@@ -1,19 +1,21 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  PrimaryColumn,
 } from 'typeorm';
-
 
 @Entity('lines')
 class Line {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
   name: string;
+
+  @Column()
+  stop_name: string;
 
   @CreateDateColumn()
   created_at: Date;

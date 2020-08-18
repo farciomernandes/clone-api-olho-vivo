@@ -25,7 +25,7 @@ class UpdatedLineService {
       ...data,
     };
 
-    const updatedLine = await this.vehiclesRepository.update(id, line)
+    const updatedLine = await this.vehiclesRepository.update(id, line);
     return updatedLine;
   }
 }

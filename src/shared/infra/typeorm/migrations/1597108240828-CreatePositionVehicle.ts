@@ -22,6 +22,10 @@ export default class CreatePositionVehicle1597108240828
             type: 'decimal',
           },
           {
+            name: 'vehicle_name',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

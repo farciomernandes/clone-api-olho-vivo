@@ -22,7 +22,7 @@ class Vehicle {
   model: string;
 
   @ManyToOne(() => Line)
-  @JoinColumn({name: 'line_id'})
+  @JoinColumn({ name: 'line_id' })
   line: string;
 
   @Column()

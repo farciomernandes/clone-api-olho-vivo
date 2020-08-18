@@ -1,18 +1,18 @@
 /* eslint-disable no-useless-constructor */
 import { injectable, inject } from 'tsyringe';
 
-import ILineRepository from '../repositories/ILineRepository';
-import Line from '../infra/typeorm/entities/Line';
+import ILineRepository from '../../repositories/ILineRepository';
+import Line from '../../infra/typeorm/entities/Line';
 
 @injectable()
 class GetAllVehiclesService {
   constructor(
     @inject('LinesRepository')
-    private stopsRepository: ILineRepository,
+    private linesRepository: ILineRepository,
   ) {}
 
   public async execute(): Promise<Line[]> {
-    const getAll = await this.stopsRepository.getAll();
+    const getAll = await this.linesRepository.getAll();
 
     return getAll;
   }

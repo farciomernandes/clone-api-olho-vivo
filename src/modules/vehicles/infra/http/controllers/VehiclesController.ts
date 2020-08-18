@@ -8,8 +8,6 @@ import UpdatedVehicleService from '../../../services/UpdatedVehicleService';
 import GetAllVehicleService from '../../../services/GetAllVehicleService';
 import FindByIdVehicleService from '../../../services/FindByIdVehicleService';
 
-
-
 export default class VehiclesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { model, name, line_id } = request.body;
@@ -39,12 +37,12 @@ export default class VehiclesController {
     const { name, model } = request.body;
     const { id } = request.params;
 
-
     const uptdadeVehicle = container.resolve(UpdatedVehicleService);
 
     const data = {
       name,
       model,
+      line_id: id,
     };
 
     const updatedVehicle = await uptdadeVehicle.execute(id, data);

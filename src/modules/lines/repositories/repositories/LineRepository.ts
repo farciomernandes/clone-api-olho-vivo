@@ -43,14 +43,19 @@ class LineRepository implements ILineRepository {
 
     const lineCreated = await this.ormRepository.save(newLine);
 
-    const createRelation = this.lineStopRepository.create({
-      id: uuid(),
-      line_id: lineId,
-      stop_id: stop.id,
-      name,
+    const checkExistRelation = await this.ormRepository.findOne({
+      where: { name: newLine.name },
     });
 
-    await this.lineStopRepository.save(createRelation);
+    if (!checkExistRelation) {
+      const createRelation = this.lineStopRepository.create({
+        id: uuid(),
+        line_id: lineId,
+        stop_id: stop.id,
+      });
+
+      await this.lineStopRepository.save(createRelation);
+    }
 
     return lineCreated;
   }

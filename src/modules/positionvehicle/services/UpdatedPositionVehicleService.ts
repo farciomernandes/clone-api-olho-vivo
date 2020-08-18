@@ -28,7 +28,6 @@ class UpdatedLineService {
       ...data,
     };
 
-
     await this.positionVehicleRepository.update(id, vehicle);
 
     return vehicle;

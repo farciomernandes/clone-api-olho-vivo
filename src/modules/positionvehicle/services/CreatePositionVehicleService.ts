@@ -18,8 +18,6 @@ class CreatePositionVehicleService {
     longitude,
     id,
   }: ICreatePositionVehicle): Promise<PositionVehicle> {
-
-
     const positionVehicle = await this.positionVehicleRepository.create({
       latitude,
       longitude,

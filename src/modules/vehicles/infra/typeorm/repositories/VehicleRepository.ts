@@ -5,26 +5,27 @@ import AppError from '@shared/errors/AppError';
 import Vehicle from '../entities/Vehicle';
 import Line from '../../../../lines/infra/typeorm/entities/Line';
 
-
 import ICreateVehicleDTO from '../../../dtos/ICreateVehicleDTO';
 import IVehiclesRepositoy from '../../../repositories/IVehiclesRepository';
 
 class VehicleRepositoy implements IVehiclesRepositoy {
   private ormRepository: Repository<Vehicle>;
-  private lineeRepository: Repository<Line>;
 
+  private lineeRepository: Repository<Line>;
 
   constructor() {
     this.ormRepository = getRepository(Vehicle);
     this.lineeRepository = getRepository(Line);
-
   }
 
-  public async create({ name, model, line_id }: ICreateVehicleDTO): Promise<Vehicle> {
-
+  public async create({
+    name,
+    model,
+    line_id,
+  }: ICreateVehicleDTO): Promise<Vehicle> {
     const checkExist = await this.lineeRepository.findOne(line_id);
 
-    if(!checkExist){
+    if (!checkExist) {
       throw new AppError('Line_id not found!');
     }
 

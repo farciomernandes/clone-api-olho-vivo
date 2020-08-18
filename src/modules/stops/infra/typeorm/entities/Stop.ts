@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-
 @Entity('stops')
 class Stop {
   @PrimaryGeneratedColumn('uuid')

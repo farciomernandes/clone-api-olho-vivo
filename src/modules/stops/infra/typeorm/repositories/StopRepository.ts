@@ -25,8 +25,7 @@ class StopRepositoy implements IStopRepositoy {
       id: uuid(),
     });
 
-      const created = await this.ormRepository.save(stop);
-
+    const created = await this.ormRepository.save(stop);
 
     return created;
   }

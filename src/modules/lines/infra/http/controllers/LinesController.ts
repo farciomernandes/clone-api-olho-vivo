@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import CreateLineService from '../../../services/CreateLineService';
-import DeleteLineService from '../../../services/DeleteLineService';
-import UpdatedLineService from '../../../services/UpdatedLineService';
+import CreateLineService from '../../../services/LineServices/CreateLineService';
+import DeleteLineService from '../../../services/LineServices/DeleteLineService';
+import UpdatedLineService from '../../../services/LineServices/UpdatedLineService';
 
-import GetAllLineService from '../../../services/GetAllLineService';
-import FindByIdLineService from '../../../services/FindByIdLineService';
-import LineByStop from '../../../services/LineByStop';
-import VehiclesForLineService from '../../../services/VehiclesForLineService';
-
+import GetAllLineService from '../../../services/LineServices/GetAllLineService';
+import FindByIdLineService from '../../../services/LineServices/FindByIdLineService';
+import LineByStop from '../../../services/LineStopRelationServices/LineByStop';
+import VehiclesForLineService from '../../../services/LineStopRelationServices/VehiclesForLineService';
 
 export default class LinesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -41,8 +40,6 @@ export default class LinesController {
 
     const uptdadeVehicle = container.resolve(UpdatedLineService);
 
-
-
     const updatedStop = await uptdadeVehicle.execute(id, name);
 
     return response.json(updatedStop);
@@ -69,26 +66,29 @@ export default class LinesController {
     return response.json(vehicles);
   }
 
-  public async lineByStop(request: Request, response: Response): Promise<Response> {
+  public async lineByStop(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const { stop_id } = request.body;
 
     const getLines = container.resolve(LineByStop);
 
     const lines = await getLines.execute(stop_id);
 
-
     return response.json(lines);
   }
 
-  public async vehiclesForLine(request: Request, response: Response): Promise<Response>{
+  public async vehiclesForLine(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const { id } = request.body;
 
     const getVehicles = container.resolve(VehiclesForLineService);
 
     const vehicles = await getVehicles.execute(id);
 
-
     return response.json(vehicles);
-
   }
 }

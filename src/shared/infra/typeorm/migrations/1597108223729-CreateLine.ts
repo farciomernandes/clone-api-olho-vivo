@@ -16,6 +16,10 @@ export default class CreateLine1597108223729 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'stop_name',
+            type: 'varchar',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

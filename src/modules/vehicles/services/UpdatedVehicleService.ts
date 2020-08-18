@@ -19,19 +19,16 @@ class UpdatedVehicleService {
   ): Promise<Vehicle | void> {
     const checkExist = await this.vehiclesRepository.findById(id);
 
-
     if (!checkExist) {
       throw new AppError('Id not found!');
     }
-
-
 
     const vehicle = {
       ...checkExist,
       ...data,
     };
 
-    const updatedVehicle = await this.vehiclesRepository.update(id ,vehicle);
+    const updatedVehicle = await this.vehiclesRepository.update(id, vehicle);
     return updatedVehicle;
   }
 }

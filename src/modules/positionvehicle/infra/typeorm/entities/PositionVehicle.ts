@@ -10,7 +10,6 @@ import {
 
 import Vehicle from '../../../../vehicles/infra/typeorm/entities/Vehicle';
 
-
 @Entity('vehiclePosition')
 class PositionVehicle {
   @PrimaryColumn()
@@ -22,8 +21,11 @@ class PositionVehicle {
   @Column()
   longitude: number;
 
+  @Column()
+  vehicle_name: string;
+
   @ManyToOne(() => Vehicle)
-  @JoinColumn({name: 'vehicle_id'})
+  @JoinColumn({ name: 'vehicle_id' })
   vehicle: string;
 
   @Column()

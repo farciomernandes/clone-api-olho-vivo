@@ -11,22 +11,23 @@ import {
 import Line from './Line';
 import Stop from '../../../../stops/infra/typeorm/entities/Stop';
 
-
 @Entity('lines_stops')
 class LineStopRelation {
-
   @PrimaryColumn()
   id: string;
 
+  @Column()
+  name: string;
+
   @ManyToOne(() => Line)
-  @JoinColumn({name: 'line_id'})
+  @JoinColumn({ name: 'line_id' })
   line: string;
 
   @Column()
   line_id: string;
 
   @ManyToOne(() => Stop)
-  @JoinColumn({name: 'stop_id'})
+  @JoinColumn({ name: 'stop_id' })
   stop: string;
 
   @Column()

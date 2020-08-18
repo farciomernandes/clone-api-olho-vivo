@@ -34,6 +34,5 @@ export default class AddVehicleIdFieldToPositionVehicle1597120726820
     await queryRunner.dropForeignKey('vehiclePosition', 'VehiclePosition');
 
     await queryRunner.dropColumn('vehiclePosition', 'vehicle_id');
-
   }
 }

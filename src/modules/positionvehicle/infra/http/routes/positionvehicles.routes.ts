@@ -15,6 +15,9 @@ positionVehicleRouter.delete(
   positionVehicleRoutersController.delete,
 );
 positionVehicleRouter.get('/', positionVehicleRoutersController.getAll);
-positionVehicleRouter.get('/search/:id', positionVehicleRoutersController.findById);
+positionVehicleRouter.get(
+  '/search/:id',
+  positionVehicleRoutersController.findById,
+);
 
 export default positionVehicleRouter;

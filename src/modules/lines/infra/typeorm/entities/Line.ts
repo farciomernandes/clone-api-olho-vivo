@@ -15,7 +15,6 @@ class Line {
   @Column()
   name: string;
 
-
   @CreateDateColumn()
   created_at: Date;
 

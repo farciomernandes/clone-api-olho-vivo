@@ -76,9 +76,7 @@ class PositionVehicleRepository implements IPositionVehicleRepository {
     id: string,
     data: ICreatePositionVehicle,
   ): Promise<PositionVehicle | void> {
-    const checkExist = await this.ormRepository.findOne({
-      where: {vehicle_id: id}
-    });
+    const checkExist = await this.ormRepository.findOne(id);
 
     if (!checkExist) {
       throw new AppError('PositionVehicle not found!');

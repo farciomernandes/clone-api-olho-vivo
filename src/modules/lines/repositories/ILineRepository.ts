@@ -9,4 +9,5 @@ export default interface ILineRepositoy {
   update(id: string, data: Line): Promise<Line | void>;
   delete(id: string): Promise<Line | void>;
   lineByStop(id_stop: string): Promise<Stop[]>;
+  vehiclesForLine(id: string): Promise<Line[]>;
 }

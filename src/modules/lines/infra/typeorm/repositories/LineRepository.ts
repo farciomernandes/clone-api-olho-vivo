@@ -7,12 +7,14 @@ import Stop from '../../../../stops/infra/typeorm/entities/Stop';
 
 import ICreateLineDTO from '../../../dtos/ICreateLineDTO';
 import ILineRepository from '../../../repositories/ILineRepository';
+import Vehicle from '../../../../vehicles/infra/typeorm/entities/Vehicle';
 
 class LineRepository implements ILineRepository {
   private ormRepository: Repository<Line>;
   private lineStopRepository: Repository<LineStopRelation>;
   private stopRepository: Repository<Stop>;
-  private lineRepository: Repository<Line>;
+  private vehicleRepository: Repository<Vehicle>;
+
 
 
 
@@ -22,17 +24,18 @@ class LineRepository implements ILineRepository {
     this.ormRepository = getRepository(Line);
     this.stopRepository = getRepository(Stop);
     this.lineStopRepository = getRepository(LineStopRelation);
-    this.lineRepository = getRepository(Line);
+    this.vehicleRepository = getRepository(Vehicle);
+
 
   }
 
   public async create({ name, stop_name }: ICreateLineDTO): Promise<Line> {
     const stop = await this.stopRepository.findOne({
-      where: {name: stop_name}
+      where: { name: stop_name }
     })
 
     if(!stop){
-      throw new AppError('Stop not found!')
+      throw new AppError('Stop not found!');
     }
 
     const lineId = uuid();
@@ -44,7 +47,6 @@ class LineRepository implements ILineRepository {
 
 
      const lineCreated = await this.ormRepository.save(newLine);
-     console.log('BUG')
 
     const createRelation = await this.lineStopRepository.create({
       id: uuid(),
@@ -69,7 +71,7 @@ class LineRepository implements ILineRepository {
 
   public async findById(id: string): Promise<Line | undefined> {
     const searchLine = await this.ormRepository.findOne(id);
-
+    console.log(searchLine)
     return searchLine || undefined;
   }
 
@@ -95,17 +97,31 @@ class LineRepository implements ILineRepository {
 
     return createdLine;
   }
+
   public async lineByStop(stop_id: string): Promise<Stop[]>{
     const searchLines = await this.lineStopRepository.find({
       where: {stop_id: stop_id}
     })
 
-
+console.log(searchLines)
     if(searchLines.length == 0){
-      throw new AppError('This stop do not have lines.')
+      throw new AppError('This stop do not have lines.');
     }
 
     return searchLines;
+  }
+
+  public async vehiclesForLine(id: string): Promise<Vehicle[]>{
+    const vehicles = await this.vehicleRepository.find({
+      where: { line_id: id }
+    });
+
+
+    if(!vehicles){
+      throw new AppError('Nobody vehicle encountered this id!');
+    }
+
+    return vehicles;
   }
 }
 

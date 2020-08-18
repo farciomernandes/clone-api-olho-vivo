@@ -13,7 +13,6 @@ class LineByStopService {
 
   public async execute(stop_id: string): Promise<Line[]> {
     const byStops = await this.stopsRepository.lineByStop(stop_id);
-    console.log(byStops)
     return byStops;
   }
 }

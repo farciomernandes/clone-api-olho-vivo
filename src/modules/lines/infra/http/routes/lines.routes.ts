@@ -12,7 +12,6 @@ linesRouter.delete('/delete', linesController.delete);
 linesRouter.get('/', linesController.getAll);
 linesRouter.get('/search/:id', linesController.findById);
 linesRouter.get('/search', linesController.lineByStop);
-
-
+linesRouter.get('/vehicles', linesController.vehiclesForLine);
 
 export default linesRouter;

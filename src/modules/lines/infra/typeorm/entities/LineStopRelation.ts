@@ -11,6 +11,7 @@ import {
 import Line from './Line';
 import Stop from '../../../../stops/infra/typeorm/entities/Stop';
 
+
 @Entity('lines_stops')
 class LineStopRelation {
 

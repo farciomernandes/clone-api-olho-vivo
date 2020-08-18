@@ -78,6 +78,7 @@ export default class LineStopsRelations1597611203733 implements MigrationInterfa
       await queryRunner.dropForeignKey('lines_stops', 'LineIdRelation');
 
       await queryRunner.dropColumn('lines_stops', 'line_id');
+
     }
 
 }

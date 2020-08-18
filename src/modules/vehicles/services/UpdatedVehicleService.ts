@@ -18,7 +18,6 @@ class UpdatedVehicleService {
     data: ICreateVehicleDTO,
   ): Promise<Vehicle | void> {
     const checkExist = await this.vehiclesRepository.findById(id);
-    console.log(data)
 
 
     if (!checkExist) {

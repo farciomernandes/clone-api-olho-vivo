@@ -68,11 +68,9 @@ class VehicleRepositoy implements IVehiclesRepositoy {
     id: string,
     data: ICreateVehicleDTO,
   ): Promise<Vehicle | void> {
-    console.log('ENTORU')
     const searchVehicle = await this.ormRepository.findOne({
       where: { id },
     });
-    console.log('ALO')
 
     if (!searchVehicle) {
       throw new AppError('Id not found! ');
@@ -83,7 +81,6 @@ class VehicleRepositoy implements IVehiclesRepositoy {
       ...data,
     };
 
-    console.log(vehicle)
     const createVehicle = await this.ormRepository.save(vehicle);
 
     return createVehicle;

@@ -23,12 +23,12 @@ class LineStopRelation {
   @JoinColumn({ name: 'line_id' })
   line: string;
 
-  @Column()
-  line_id: string;
-
   @ManyToOne(() => Stop)
   @JoinColumn({ name: 'stop_id' })
   stop: string;
+
+  @Column()
+  line_id: string;
 
   @Column()
   stop_id: string;

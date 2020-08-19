@@ -12,7 +12,7 @@ class FindByIdLineService {
     private linesRepository: ILineRepository,
   ) {}
 
-  public async execute(id: string): Promise<Line | void> {
+  public async execute(id: string): Promise<Line[] | void> {
     const checkExist = await this.linesRepository.findById(id);
 
     if (!checkExist) {

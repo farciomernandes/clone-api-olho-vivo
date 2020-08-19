@@ -96,9 +96,7 @@ class LineRepository implements ILineRepository {
       ...checkExist,
       ...data,
     };
-
     const createdLine = await this.ormRepository.save(newLine);
-
     return createdLine;
   }
 

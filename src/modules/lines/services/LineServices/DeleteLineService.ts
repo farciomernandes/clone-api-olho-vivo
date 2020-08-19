@@ -18,8 +18,8 @@ class DeleteLineService {
     if (!checkExist) {
       throw new AppError('Id not found!');
     }
-    await this.linesRepository.delete(id);
-    return checkExist;
+    const result = await this.linesRepository.delete(id);
+    return result;
   }
 }
 

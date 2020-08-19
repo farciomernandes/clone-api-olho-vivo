@@ -15,9 +15,9 @@ export default class LinesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, stop_name } = request.body;
 
-    const createStop = container.resolve(CreateLineService);
+    const createLine = container.resolve(CreateLineService);
 
-    const stop = await createStop.execute({
+    const stop = await createLine.execute({
       name,
       stop_name,
     });
@@ -28,22 +28,22 @@ export default class LinesController {
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.body;
 
-    const deleteStop = container.resolve(DeleteLineService);
+    const deleteLine = container.resolve(DeleteLineService);
 
-    const deletedVehicle = await deleteStop.execute(id);
+    const deletedLine = await deleteLine.execute(id);
 
-    return response.json(deletedVehicle);
+    return response.json(deletedLine);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
     const { id } = request.params;
 
-    const uptdadeVehicle = container.resolve(UpdatedLineService);
+    const uptdadeline = container.resolve(UpdatedLineService);
 
-    const updatedStop = await uptdadeVehicle.execute(id, name);
+    const updatedLine = await uptdadeline.execute(id, name);
 
-    return response.json(updatedStop);
+    return response.json(updatedLine);
   }
 
   public async findById(
@@ -52,19 +52,19 @@ export default class LinesController {
   ): Promise<Response> {
     const { id } = request.params;
 
-    const findByStop = container.resolve(FindByIdLineService);
+    const findByLine = container.resolve(FindByIdLineService);
 
-    const vehicle = await findByStop.execute(id);
+    const line = await findByLine.execute(id);
 
-    return response.json(vehicle);
+    return response.json(line);
   }
 
   public async getAll(request: Request, response: Response): Promise<Response> {
-    const getStops = container.resolve(GetAllLineService);
+    const getLines = container.resolve(GetAllLineService);
 
-    const vehicles = await getStops.execute();
+    const lines = await getLines.execute();
 
-    return response.json(vehicles);
+    return response.json(lines);
   }
 
   public async lineByStop(
@@ -97,7 +97,7 @@ export default class LinesController {
     request: Request,
     response: Response,
   ): Promise<Response> {
-    const getRelations = container.resolve(GetAllLineService);
+    const getRelations = container.resolve(GetAllRelationsService);
 
     const relations = await getRelations.execute();
 

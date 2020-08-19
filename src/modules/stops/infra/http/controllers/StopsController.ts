@@ -12,32 +12,32 @@ export default class StopsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, latitude, longitude } = request.body;
 
-    const createVehicle = container.resolve(CreateStopService);
+    const createStop = container.resolve(CreateStopService);
 
-    const vehicle = await createVehicle.execute({
+    const stop = await createStop.execute({
       name,
       latitude,
       longitude,
     });
 
-    return response.json(vehicle);
+    return response.json(stop);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.body;
 
-    const deleteLine = container.resolve(DeleteLineService);
+    const deleteStop = container.resolve(DeleteLineService);
 
-    const deletedLine = await deleteLine.execute(id);
+    const deletedStop = await deleteStop.execute(id);
 
-    return response.json(deletedLine);
+    return response.json(deletedStop);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { name, latitude, longitude } = request.body;
     const { id } = request.params;
 
-    const uptdadeLine = container.resolve(UpdatedLineService);
+    const uptdadeStop = container.resolve(UpdatedLineService);
 
     const data = {
       name,
@@ -45,9 +45,9 @@ export default class StopsController {
       longitude,
     };
 
-    const updatedLine = await uptdadeLine.execute(id, data);
+    const updatedStop = await uptdadeStop.execute(id, data);
 
-    return response.json(updatedLine);
+    return response.json(updatedStop);
   }
 
   public async findById(

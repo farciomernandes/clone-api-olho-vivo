@@ -82,6 +82,9 @@ class VehicleRepositoy implements IVehiclesRepositoy {
       ...data,
     };
 
+    delete vehicle.line_id;
+    delete vehicle.line_name;
+
     const createVehicle = await this.ormRepository.save(vehicle);
 
     return createVehicle;

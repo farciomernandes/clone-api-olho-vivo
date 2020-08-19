@@ -41,7 +41,7 @@ export default class PositionVehiclesController {
     const { latitude, longitude } = request.body;
     const { id } = request.params;
 
-    const uptdadeVehicle = container.resolve(UpdatedPositionVehicleService);
+    const uptdadePosition = container.resolve(UpdatedPositionVehicleService);
 
     const data = {
       id,
@@ -49,7 +49,7 @@ export default class PositionVehiclesController {
       longitude,
     };
 
-    const updatedPositionVehicle = await uptdadeVehicle.execute(id, data);
+    const updatedPositionVehicle = await uptdadePosition.execute(id, data);
 
     return response.json(updatedPositionVehicle);
   }
